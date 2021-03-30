@@ -40,9 +40,16 @@ export const placeOrder = createAsyncThunk(
       extraReducers:{
         [placeOrder.fulfilled]: (state, action) => {
             console.log("FInalllyy Found you");
+            //Loader = false;
+            //Toast = true <Button title="Track Your Order"/>
         },
         [placeOrder.rejected]: (state, action) => {
             console.log("Rejected")
+            //Loader = false;
+            //Red mai alert Saying order couldn't be placed...
+        },
+        [placeOrder.pending]: (state, action) => {
+            // Loader = true {loader && <ProgressBar />}
         }
       }
 

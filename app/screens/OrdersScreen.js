@@ -153,6 +153,11 @@ function OrdersScreen(props) {
           />
         )}
       />
+      {/*Button Make Payment
+        razorpay
+      */}
+      {/*Button Order More (Reducer) clear navigate menu screen*/}
+      
     </ScrollView>
   );
 }
