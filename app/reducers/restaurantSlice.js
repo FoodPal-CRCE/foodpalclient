@@ -9,7 +9,7 @@ import {
       'restaurant/getAll',
       async(value, {rejectWithValue}) => {
           console.log("Inside Thunk");
-          const url = "http://localhost:5000/restaurant/all";
+          const url = "http://192.168.1.39:5000/restaurant/all";
           try{
             const data = await axios({
                 method: "GET",
@@ -31,7 +31,7 @@ import {
     'restaurant/get',
     async (value,{rejectWithValue}) => {
         console.log("Called Thunk");
-        const url = 'http://192.168.1.37:5000/customer/get/restaurant/' + value.id;
+        const url = 'http://192.168.1.39:5000/customer/get/restaurant/' + value.id;
         
         console.log("Token",value);
         try{

@@ -8,6 +8,8 @@ import { IconButton } from 'react-native-paper';
 import ScanNavigator from './ScanNavigator';
 import DisectPlate from '../screens/DisectPlate';
 import AllRestaurant from '../screens/AllRestaurant';
+import BlogScreen from '../screens/BlogScreen';
+import BlogNavigator from './BlogNavigator';
 // import { mdiQrcodeScan } from '@mdi/js';
 const Tab = createBottomTabNavigator();
 
@@ -34,8 +36,8 @@ const AppNavigator = () => (
             // tabBarIcon: ({color,size}) => <Icon path={mdiAccount} size={size} color={color}/>
         }}/> 
         <Tab.Screen 
-        name="Partnered Restaurants" 
-        component={AllRestaurant}
+        name="Blogs" 
+        component={BlogNavigator}
         options={{
             // tabBarIcon: ({color,size}) => <Icon path={mdiAccount} size={size} color={color}/>
         }}/> 

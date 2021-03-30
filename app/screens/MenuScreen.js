@@ -8,7 +8,7 @@ import { getRestaurant } from '../reducers/restaurantSlice';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function MenuScreen({route}) {
+export default function MenuScreen({navigation, route}) {
     const data = route.params;
     const dispatch = useDispatch();
     var mee = useSelector((state) => state.signin.token);
@@ -28,7 +28,7 @@ export default function MenuScreen({route}) {
             </Appbar.Header>
 
             <MenuList />
-            <Button>View Cart</Button>
+            <Button onPress={() => navigation.navigate("CartScreen", {"restId": data.id, "tableNumber": data.tablenumber})}>View Cart</Button>
         </View>
     )
 }

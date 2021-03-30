@@ -7,7 +7,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import AuthNavigator from './app/navigator/authNavigator';
 import {Provider} from 'react-redux';
 //import { createStore } from "redux";
-import authReducer from './app/reducers/authReducer';
 import store from './app/utils/store';
 
 export default function App() {
