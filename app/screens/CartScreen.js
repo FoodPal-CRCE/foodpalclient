@@ -8,10 +8,12 @@ function CartScreen({route}) {
     var initial = route.params
     var [cartData, setcarData] = useState(useSelector((state) => state.cart.cartItems));
     console.log("CartData: ",cartData);
-    
+    const id_cust = useSelector((state)=> state.signin.id);
+    console.log("ID Customer: ",id_cust);
     var mee = useSelector((state) => state.signin.token);
     const dispatch = useDispatch();
     var finalDoc;
+    var total = useSelector((state) => state.cart.totalPrice)
     const [items, setItems] = useState([]);
     const [ren, setRen] = useState(false);
     const dataMake = () => {
@@ -68,7 +70,8 @@ function CartScreen({route}) {
                 price={item.price} 
                 image={image.uri}/>)}
             />}
-                
+
+            {ren && <Text style={{margin: 50}}>Total Price: {total}</Text>}      
             <Button onPress={()=> dispatch(placeOrder({doc: finalDoc, mee: mee}))}>Place order</Button>
         </View>
     );

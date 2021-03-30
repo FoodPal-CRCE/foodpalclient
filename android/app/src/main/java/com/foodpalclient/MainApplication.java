@@ -1,5 +1,5 @@
 package com.foodpalclient;
-
+import com.razorpay.rn.RazorpayPackage;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
@@ -31,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+          // packages.add(new RazorpayPackage());
           return packages;
         }
 

@@ -62,6 +62,7 @@ import {
           me: {},
           checked: false,
           token:'',
+          id: '',
       },
       reducers: {
           saveme: (state, action) => {
@@ -82,8 +83,8 @@ import {
       },
       extraReducers:{
           [authenticator.fulfilled]: (state, {payload}) => {
-              console.log("payload: ",payload.data);
-              
+              console.log("payload: ",payload.data.customer["_id"]);
+              state.id = payload.data.customer["_id"];
               state.isLoggedIn = true;
               state.me = payload;
               state.token=payload.data.accessToken;

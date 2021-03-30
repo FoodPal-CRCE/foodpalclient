@@ -21,6 +21,7 @@ const cartSlice = createSlice({
 
         }, //key is id of item and value is the item 
         error: null,
+        totalPrice: 0,
     },
     reducers: {
         addItem(state, action) {
@@ -35,6 +36,7 @@ const cartSlice = createSlice({
                 //this means update an object 
                 state.cartItems[_id]["quantity"] += 1
                 console.log("item updated!");
+                
             }
             else {
                 //add new key value pair to cart
@@ -46,11 +48,15 @@ const cartSlice = createSlice({
                 }
             }
             console.log(state.cartItems);
+            state.totalPrice += price;
+            console.log(state.totalPrice);
         },
         removeItem(state, action) {
             const { _id } = action.payload;
             delete state.cartItems[_id]; 0
             console.log(state.cartItems);
+            state.totalPrice -= price;
+            console.log(state.totalPrice);
         },
         clear(state, action) {
             for (var item in state.cartItems) delete state.cartItems[item];
