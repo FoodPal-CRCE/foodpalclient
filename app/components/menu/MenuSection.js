@@ -30,8 +30,8 @@ export default function MenuSection({ item, onChange }) {
         if(payload3==='-'){
             dispatch(removeSingleItem({_id: payload}));
             // checkqty(payload);   
-            console.log(cart);
-            console.log(cart[id]["quantity"]);     
+            // console.log(cart);
+            // console.log(cart[id]["quantity"]);     
             
         }      
         else{
