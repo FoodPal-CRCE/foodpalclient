@@ -18,13 +18,14 @@ function LoginScreen({navigation}) {
       password: password
     }
     dispatch(await authenticator(values));
-    if(islogged==true){
-      navigation.navigate('AppNavigator')
-    }
+    
   }
   useEffect(()=>{
     // console.log('Yeh hai:',islogged);
-  })
+    if(islogged== true){
+      navigation.navigate('AppNavigator');
+    }
+  }, [islogged])
 
   return (
     <View style={styles.main}>
@@ -50,7 +51,9 @@ function LoginScreen({navigation}) {
           style={styles.submit}
           contentStyle={{height: 50}}
           mode="contained"
-          onPress={() => login()}>
+          onPress={async() => {
+            await login()            
+          }}>
           Submit
         </Button>
 
@@ -58,7 +61,7 @@ function LoginScreen({navigation}) {
           <Text>
             Don't have account?{' '}
             <Text
-              onPress={() => this.props.navigation.navigate('SignupScreen')}>
+              onPress={() => navigation.navigate('SignupScreen')}>
               Sign Up
             </Text>
           </Text>

@@ -5,7 +5,7 @@ import { TextInput,Button } from 'react-native-paper';
 import { signup } from '../reducers/signupSlice';
 import {useDispatch} from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
-function SignupScreen(){
+function SignupScreen({navigation}){
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -74,7 +74,7 @@ function SignupScreen(){
 
             <View style={styles.signupText} >
                 <Text>
-                    Already have an account? <Text onPress={()=>this.props.navigation.navigate('LoginScreen')}>Login</Text>
+                    Already have an account? <Text onPress={()=>navigation.navigate('LoginScreen')}>Login</Text>
                 </Text>
             </View>
         </View>
