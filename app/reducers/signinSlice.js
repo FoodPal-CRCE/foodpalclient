@@ -16,7 +16,7 @@ import {
         //We can have axios calls in one file like we did.
         const data = await axios({
             method: 'POST',
-            url: 'http://192.168.1.39:5000/customer/signin',
+            url: 'http://192.168.1.40:5000/customer/signin',
             data:{
                 email: values.email,
                 password: values.password,
@@ -63,6 +63,9 @@ import {
           checked: false,
           token:'',
           id: '',
+          customerName: '',
+          phone_number: '',
+          email: ''
       },
       reducers: {
           saveme: (state, action) => {
@@ -83,12 +86,15 @@ import {
       },
       extraReducers:{
           [authenticator.fulfilled]: (state, {payload}) => {
-              console.log("payload: ",payload.data.customer["_id"]);
+              console.log("payload: ",payload.data);
               state.id = payload.data.customer["_id"];
               state.isLoggedIn = true;
               state.me = payload;
               state.token=payload.data.accessToken;
-              
+              // console.log(state.me.data.customer['name']);
+              state.customerName = payload.data.customer['name']; 
+              state.phone_number = payload.data.customer['phone_number'];
+              state.email = payload.data.customer['email'];    
           },
           [authenticator.rejected]: (state, action) => {
             //   console.log(action);

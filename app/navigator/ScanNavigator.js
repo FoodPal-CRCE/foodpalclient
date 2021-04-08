@@ -9,6 +9,7 @@ import OnboardingUI from '../screens/OnboardingUI';
 import ScanScreen from '../screens/ScanScreen';
 import MenuScreen from '../screens/MenuScreen';
 import CartScreen from '../screens/CartScreen';
+import OrdersScreen from '../screens/OrdersScreen';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,8 @@ const ScanNavigator = () => (
         <Stack.Screen name="ScanScreen" component={ScanScreen}options={{headerShown: false}}/>
         <Stack.Screen name="MenuScreen" component={MenuScreen} options={{headerShown: false}} />
         <Stack.Screen name="CartScreen" component={CartScreen} options={{headerShown: false}} />
+        <Stack.Screen name="OrdersScreen" component={OrdersScreen} options={{headerShown: false}} />
+
     </Stack.Navigator>
 )
 

@@ -9,7 +9,7 @@ export const placeOrder = createAsyncThunk(
     'cart/placeorder',
     async(value, {rejectWithValue}) => {
             console.log(value);
-            const url = "http://192.168.1.39:5000/orders/add";
+            const url = "http://192.168.1.40:5000/orders/add";
             try{
                 const data = await axios({
                     method: 'POST',

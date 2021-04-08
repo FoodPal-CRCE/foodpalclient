@@ -7,11 +7,13 @@ import {
 } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import { useDispatch } from 'react-redux';
+import { saveRest } from '../reducers/scanSlice';
 
 
 
 export default function ScanScreen({navigation}){
-  
+  const dispatch = useDispatch();
   const onSuccess = e => {
     // Linking.openURL(e.data).catch(err =>
     //   console.error('An error occured', err)
@@ -19,8 +21,12 @@ export default function ScanScreen({navigation}){
     console.log(e.data);
     var data= JSON.parse(e.data);
     console.log(data);
-    // getRest();
-    navigation.navigate('MenuScreen', {"id": data.id, "tablenumber": data.tableNumber});
+    var doc = {
+      id: data.id,
+      tablenumber: data.tableNumber
+    }
+    dispatch(saveRest(doc))
+    navigation.navigate('MenuScreen');
     //Redux --> DB --> then --> Navigate to Restraunt Menu 
   };
 

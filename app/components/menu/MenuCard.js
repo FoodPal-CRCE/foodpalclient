@@ -38,6 +38,7 @@ export default class MenuCard extends Component {
         super(props);
         this.state = {
             clicked: false,
+            count: 1,
         }
         this.clickHandle = this.clickHandle.bind(this);
     }
@@ -47,6 +48,12 @@ export default class MenuCard extends Component {
             clicked: !value
         })
     } 
+    componentDidMount(){
+        this.setState({
+            clicked: false,
+            count: 1,
+        })
+    }
     render() {
         return (
             <View style={styles.root}>
@@ -59,7 +66,7 @@ export default class MenuCard extends Component {
                             this.clickHandle(this.state.clicked);
                             this.props.addCartHandler({_id: this.props.id.toString(), name: this.props.title, price: this.props.price})
                             }}>Add</Button>}
-                        {this.state.clicked && <Counter start={1} onChange={this.props.onChange.bind(this, this.props.title, this.props.price, this.props.id.toString())} />}
+                        {this.state.clicked && <Counter start={this.state.count} onChange={this.props.onChange.bind(this, this.props.title, this.props.price, this.props.id.toString())} />}
                     </View>
                 </View>
             </View>

@@ -22,6 +22,7 @@ const cartSlice = createSlice({
         }, //key is id of item and value is the item 
         error: null,
         totalPrice: 0,
+        localTotal: 0,
     },
     reducers: {
         addItem(state, action) {
@@ -50,6 +51,7 @@ const cartSlice = createSlice({
             console.log(state.cartItems);
             state.totalPrice += price;
             console.log(state.totalPrice);
+            state.localTotal += price;
         },
         removeItem(state, action) {
             const { _id } = action.payload;
@@ -57,10 +59,13 @@ const cartSlice = createSlice({
             console.log(state.cartItems);
             state.totalPrice -= price;
             console.log(state.totalPrice);
+            state.localTotal -= price;
         },
         clear(state, action) {
             for (var item in state.cartItems) delete state.cartItems[item];
             console.log(state.cartItems);
+            state.localTotal = 0;
+            state.totalPrice = 0;
         },
         removeSingleItem(state, action) {
             const { _id } = action.payload;

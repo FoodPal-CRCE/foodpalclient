@@ -9,7 +9,7 @@ import {
       'restaurant/getAll',
       async(value, {rejectWithValue}) => {
           console.log("Inside Thunk");
-          const url = "http://192.168.1.39:5000/restaurant/all";
+          const url = "http://192.168.1.40:5000/restaurant/all";
           try{
             const data = await axios({
                 method: "GET",
@@ -31,7 +31,7 @@ import {
     'restaurant/get',
     async (value,{rejectWithValue}) => {
         console.log("Called Thunk");
-        const url = 'http://192.168.1.39:5000/customer/get/restaurant/' + value.id;
+        const url = 'http://192.168.1.40:5000/customer/get/restaurant/' + value.id;
         
         console.log("Token",value);
         try{
@@ -64,6 +64,7 @@ import {
         refreshed: true,
         AllRestaurant: [],
         menu: [],
+        restaurantName: '',
       },
       reducers:{
 
@@ -77,6 +78,8 @@ import {
             state.restaurantData = action.payload;
             console.log(action.payload.data.menu);
             state.menu = action.payload.data.menu;
+            state.restaurantName = action.payload.data.name;
+            console.log('Restaurant Name:  ', state.restaurantName);
         },
         [getRestaurant.rejected]: (state, action) => {
             state.status = "failed";
