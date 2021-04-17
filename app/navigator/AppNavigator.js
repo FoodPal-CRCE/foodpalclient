@@ -48,8 +48,22 @@ const AppNavigator = () => (
         name="Blogs" 
         component={BlogNavigator}
         options={{
-            // tabBarIcon: ({color,size}) => <Icon path={mdiAccount} size={size} color={color}/>
-            tabBarVisible: false,
+            // tabBarVisible: false,
+            tabBarIcon: ({focused}) => (
+                <View style={styles.screenContainer}>
+                    <Image 
+                    source={require('../assets/foodanalysis1.png')}
+                    resizeMode="contain"
+                    style={{
+                        width: 25,
+                        height: 25,
+                        tintColor: focused ? '#6617F5' : '#748c94',
+                        marginBottom: 20,
+                    }}
+                    />
+                   
+                </View>
+            )
         }}/>
         <Tab.Screen 
         name="ScanScreen" 
@@ -101,14 +115,42 @@ const AppNavigator = () => (
         name="Orders" 
         component={OrdersScreen}
         options={{
-            // tabBarIcon: ({color,size}) => <Icon path={mdiAccount} size={size} color={color}/>
+            tabBarIcon: ({focused}) => (
+                <View style={styles.screenContainer}>
+                    <Image 
+                    source={require('../assets/itemlist-edited.png')}
+                    resizeMode="contain"
+                    style={{
+                        width: 25,
+                        height: 25,
+                        tintColor: focused ? '#6617F5' : '#748c94',
+                        marginBottom: 20,
+                    }}
+                    />
+                   
+                </View>
+            )
         }}/> 
          
          <Tab.Screen 
-        name="MainScreen1" 
+        name="Profile" 
         component={MainScreen}
         options={{
-            // tabBarIcon: ({color,size}) => <Icon name="rocket" size={30} color="#900" />
+            tabBarIcon: ({focused}) => (
+                <View style={styles.screenContainer}>
+                    <Image 
+                    source={require('../assets/user-edited.png')}
+                    resizeMode="contain"
+                    style={{
+                        width: 25,
+                        height: 25,
+                        tintColor: focused ? '#6617F5' : '#748c94',
+                        marginBottom: 20,
+                    }}
+                    />
+                   
+                </View>
+            )
         }}/>
     </Tab.Navigator>
 )
