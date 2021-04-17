@@ -23,13 +23,13 @@ export default function MenuScreen({navigation, route}) {
     return (
         <View style={{ flex: 1 }}>
             <Appbar.Header>
-                <Appbar.BackAction />
+                <Appbar.BackAction/>
                 <Appbar.Content title="Our Menu" subtitle="Scanned restaurant's menu" />
 
             </Appbar.Header>
 
             <MenuList />
-            <Button onPress={() => navigation.navigate("CartScreen")}>View Cart</Button>
+            <Button onPress={() => navigation.navigate("CartScreen")} style={{marginBottom: "20%"}}>View Cart</Button>
         </View>
     )
 }
