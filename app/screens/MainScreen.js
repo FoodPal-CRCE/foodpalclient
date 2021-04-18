@@ -5,7 +5,7 @@ export default function MainScreen({navigation}) {
     return (
       <View>
       <Appbar.Header>
-      <Appbar.BackAction />
+      <Appbar.BackAction/>
       <Appbar.Content title="QR Scanner" subtitle="Order at desired Restaurant" />
       <Appbar.Action icon="magnify" />
       <Appbar.Action icon="dots-vertical" />

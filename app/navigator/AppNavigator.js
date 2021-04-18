@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from '@mdi/react'
 import { mdiAccount, mdiQrcodeScan } from '@mdi/js'
@@ -6,26 +6,30 @@ import { mdiAccount, mdiQrcodeScan } from '@mdi/js'
 import MainScreen from '../screens/MainScreen';
 import { IconButton } from 'react-native-paper';
 import ScanNavigator from './ScanNavigator';
-import DisectPlate from '../screens/DisectPlate';
-import AllRestaurant from '../screens/AllRestaurant';
 import BlogScreen from '../screens/BlogScreen';
 import BlogNavigator from './BlogNavigator';
 import {TouchableOpacity, StyleSheet, View, Image, Text} from 'react-native'
 import OrdersScreen from '../screens/OrdersScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import DMP from '../screens/DMP';
 // import { mdiQrcodeScan } from '@mdi/js';
 const Tab = createBottomTabNavigator();
 
-const AppNavigator = () => (
+const AppNavigator = () => {
+    const [hider, setHider] = useState(false);
+    return(
     <Tab.Navigator tabBarOptions={{
         activeTintColor: "#6617F5",
         inactiveTintColor: "white",
-
+        style:{
+            height: "8%"
+        }
     }}
     initialRouteName="ScanScreen"
     >
         <Tab.Screen 
-        name="Disect My Plate" 
-        component={DisectPlate}
+        name="DMP" 
+        component={DMP}
         options={{
             // tabBarIcon: ({color,size}) => <Icon name="rocket" size={30} color="#900" />
             tabBarIcon: ({focused}) => (
@@ -34,29 +38,31 @@ const AppNavigator = () => (
                     source={require('../assets/foodanalysis2.png')}
                     resizeMode="contain"
                     style={{
-                        width: 25,
-                        height: 25,
+                        width: 30,
+                        height: 30,
                         tintColor: focused ? '#6617F5' : '#748c94',
                         marginBottom: 20,
                     }}
+                   
                     />
                    
                 </View>
             ),
+            tabBarVisible: false
        }}/>
         <Tab.Screen 
         name="Blogs" 
         component={BlogNavigator}
         options={{
-            // tabBarVisible: false,
+            tabBarVisible: false,
             tabBarIcon: ({focused}) => (
-                <View style={styles.screenContainer}>
+                <View style={styles.screenContainer} onPress={()=>{setHider(true)}}>
                     <Image 
                     source={require('../assets/foodanalysis1.png')}
                     resizeMode="contain"
                     style={{
-                        width: 25,
-                        height: 25,
+                        width: 30,
+                        height: 30,
                         tintColor: focused ? '#6617F5' : '#748c94',
                         marginBottom: 20,
                     }}
@@ -70,7 +76,7 @@ const AppNavigator = () => (
         component={ScanNavigator}
         options={({navigation}) => ({
                 tabBarIcon: ({focused}) => (
-                <View style={styles.screenContainer}>
+                <View style={styles.screenContainer} onPress={()=> setHider(false)}>
                     
                     <Text style={{color: focused ? '#6617F5' : '#748c94', fontSize: 12}}>DMP</Text>
                 </View>
@@ -78,7 +84,7 @@ const AppNavigator = () => (
             tabBarButton: () => (
                 <TouchableOpacity
                 style={{
-                    top: -15,
+                    // top: hider ? 500:-15,
                     justifyContent: "center",
                     alignItems: 'center',
                     ...styles.shadow
@@ -86,24 +92,24 @@ const AppNavigator = () => (
                 onPress= {() => {navigation.navigate("ScanScreen")}}
                 >
                     <View style={{
-                        width: 70,
-                        height: 70,
-                        borderRadius: 35,
+                        width: 60,
+                        height: 60,
+                        borderRadius: 30,
                         backgroundColor: '#6617F5'
                     }}>
                         <Image 
                     source={require('../assets/sacnqr-edited.png')}
                     resizeMode="contain"
                     style={{
-                        width: 25,
-                        height: 25,
-                        padding: 20,
+                        width: 30,
+                        height: 30,
                         alignSelf: 'center',
                         display: "flex",
                         flex: 1,
                         alignItems: 'center'
                         
-                    }}
+                    }
+                }
                     />
                     </View>
                 </TouchableOpacity>
@@ -121,8 +127,8 @@ const AppNavigator = () => (
                     source={require('../assets/itemlist-edited.png')}
                     resizeMode="contain"
                     style={{
-                        width: 25,
-                        height: 25,
+                        width: 30,
+                        height: 30,
                         tintColor: focused ? '#6617F5' : '#748c94',
                         marginBottom: 20,
                     }}
@@ -130,11 +136,12 @@ const AppNavigator = () => (
                    
                 </View>
             )
-        }}/> 
+        }}
+        /> 
          
          <Tab.Screen 
         name="Profile" 
-        component={MainScreen}
+        component={ProfileScreen}
         options={{
             tabBarIcon: ({focused}) => (
                 <View style={styles.screenContainer}>
@@ -142,8 +149,8 @@ const AppNavigator = () => (
                     source={require('../assets/user-edited.png')}
                     resizeMode="contain"
                     style={{
-                        width: 25,
-                        height: 25,
+                        width: 30,
+                        height: 30,
                         tintColor: focused ? '#6617F5' : '#748c94',
                         marginBottom: 20,
                     }}
@@ -154,6 +161,7 @@ const AppNavigator = () => (
         }}/>
     </Tab.Navigator>
 )
+    }
 
 export default AppNavigator;
 

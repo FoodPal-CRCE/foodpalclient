@@ -235,7 +235,7 @@ function OrdersScreen({navigation}) {
             await handleOk()
             navigation.reset({
               routes: [
-                {name: 'ScanScreen'}
+                {name: 'MainScreen'}
               ],
               
             })

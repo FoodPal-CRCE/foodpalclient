@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MenuSection from './MenuSection';
 export default function MenuList() {
     const menu = useSelector((state) => state.restaurant.menu)
-    console.log(menu);
+    // console.log(menu);
     const [order, setOrder] = useState({});
     
     const renderItem = ({ item }) => (

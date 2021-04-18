@@ -6,7 +6,6 @@ import Signup from '../screens/SignupScreen';
 import SplashScreen from '../screens/SplashScreen';
 import OnboardingUI from '../screens/OnboardingUI';
 import AppNavigator from './AppNavigator';
-import TabNavigator from './TabNavigator';
 const Stack = createStackNavigator();
 
 const AuthNavigator = () => (
