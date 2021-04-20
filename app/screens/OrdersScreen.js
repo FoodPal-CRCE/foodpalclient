@@ -6,141 +6,142 @@ import OrderCard from '../components/orders/OrderCard'
 import { clear } from '../reducers/cartSlice';
 import RazorpayCheckout from "react-native-razorpay";
 import axios from 'axios';
-
+import {getOrder} from '../reducers/orderSlice'
 function OrdersScreen({navigation}) {
-  const orders = [
-    {
-      _id: '1',
-      userId: '22',
-      restaurantId: 'asasdadw',
-      createdAt: '10:30',
-      items: [
-        {
-          _id: 1,
-          name: 'Paneer Chilli',
-          quantity: 1,
-          price: 200,
-          isPreparing: true,
-          isPrepared: true,
-          isServed: true,
-        },
-        {
-          _id: 2,
-          name: 'Fried Rice',
-          quantity: 1,
-          price: 200,
-          isPreparing: true,
-          isPrepared: true,
-          isServed: true,
-        },
-        {
-          _id: 3,
-          name: 'Spring Roll',
-          quantity: 2,
-          price: 200,
-          isPreparing: true,
-          isPrepared: true,
-          isServed: true,
-        },
-      ],
-      tableNumber: 2,
-      total: 600,
-    },
-    {
-      _id: '2',
-      userId: '22',
-      restaurantId: 'asasdadw',
-      createdAt: '10:40',
-      items: [
-        {
-          _id: 1,
-          name: 'Roti',
-          quantity: 2,
-          price: 25,
-          isPreparing: true,
-          isPrepared: true,
-          isServed: true,
-        },
-        {
-          _id: 2,
-          name: 'Dal',
-          quantity: 1,
-          price: 120,
-          isPreparing: true,
-          isPrepared: true,
-          isServed: true,
-        },
-      ],
-      tableNumber: 2,
-      total: 145,
-    },
-    {
-      _id: '3',
-      userId: '22',
-      restaurantId: 'asasdadw',
-      createdAt: '10:45',
-      items: [
-        {
-          _id: 1,
-          name: 'Water Bottle',
-          quantity: 1,
-          price: 20,
-          isPreparing: true,
-          isPrepared: true,
-          isServed: true,
-        },
-      ],
-      tableNumber: 2,
-      total: 20,
-    },
-    {
-      _id: '4',
-      userId: '22',
-      restaurantId: 'asasdadw',
-      createdAt: '10:50',
-      items: [
-        {
-          _id: 1,
-          name: 'Tomato Soup',
-          quantity: 1,
-          price: 240,
-          isPreparing: true,
-          isPrepared: false,
-          isServed: false,
-        },
-        {
-          _id: 2,
-          name: 'Bread',
-          quantity: 1,
-          price: 20,
-          isPreparing: true,
-          isPrepared: false,
-          isServed: false,
-        },
-      ],
-      tableNumber: 2,
-      total: 260,
-    },
-    {
-      _id: '5',
-      userId: '22',
-      restaurantId: 'asasdadw',
-      createdAt: '11:00',
-      items: [
-        {
-          _id: 1,
-          name: 'Ice Cream',
-          quantity: 1,
-          price: 80,
-          isPreparing: true,
-          isPrepared: true,
-          isServed: true,
-        },
-      ],
-      tableNumber: 2,
-      total: 80,
-    },
-  ];
+  // const orders = [
+  //   {
+  //     _id: '1',
+  //     userId: '22',
+  //     restaurantId: 'asasdadw',
+  //     createdAt: '10:30',
+  //     items: [
+  //       {
+  //         _id: 1,
+  //         name: 'Paneer Chilli',
+  //         quantity: 1,
+  //         price: 200,
+  //         isPreparing: true,
+  //         isPrepared: true,
+  //         isServed: true,
+  //       },
+  //       {
+  //         _id: 2,
+  //         name: 'Fried Rice',
+  //         quantity: 1,
+  //         price: 200,
+  //         isPreparing: true,
+  //         isPrepared: true,
+  //         isServed: true,
+  //       },
+  //       {
+  //         _id: 3,
+  //         name: 'Spring Roll',
+  //         quantity: 2,
+  //         price: 200,
+  //         isPreparing: true,
+  //         isPrepared: true,
+  //         isServed: true,
+  //       },
+  //     ],
+  //     tableNumber: 2,
+  //     total: 600,
+  //   },
+  //   {
+  //     _id: '2',
+  //     userId: '22',
+  //     restaurantId: 'asasdadw',
+  //     createdAt: '10:40',
+  //     items: [
+  //       {
+  //         _id: 1,
+  //         name: 'Roti',
+  //         quantity: 2,
+  //         price: 25,
+  //         isPreparing: true,
+  //         isPrepared: true,
+  //         isServed: true,
+  //       },
+  //       {
+  //         _id: 2,
+  //         name: 'Dal',
+  //         quantity: 1,
+  //         price: 120,
+  //         isPreparing: true,
+  //         isPrepared: true,
+  //         isServed: true,
+  //       },
+  //     ],
+  //     tableNumber: 2,
+  //     total: 145,
+  //   },
+  //   {
+  //     _id: '3',
+  //     userId: '22',
+  //     restaurantId: 'asasdadw',
+  //     createdAt: '10:45',
+  //     items: [
+  //       {
+  //         _id: 1,
+  //         name: 'Water Bottle',
+  //         quantity: 1,
+  //         price: 20,
+  //         isPreparing: true,
+  //         isPrepared: true,
+  //         isServed: true,
+  //       },
+  //     ],
+  //     tableNumber: 2,
+  //     total: 20,
+  //   },
+  //   {
+  //     _id: '4',
+  //     userId: '22',
+  //     restaurantId: 'asasdadw',
+  //     createdAt: '10:50',
+  //     items: [
+  //       {
+  //         _id: 1,
+  //         name: 'Tomato Soup',
+  //         quantity: 1,
+  //         price: 240,
+  //         isPreparing: true,
+  //         isPrepared: false,
+  //         isServed: false,
+  //       },
+  //       {
+  //         _id: 2,
+  //         name: 'Bread',
+  //         quantity: 1,
+  //         price: 20,
+  //         isPreparing: true,
+  //         isPrepared: false,
+  //         isServed: false,
+  //       },
+  //     ],
+  //     tableNumber: 2,
+  //     total: 260,
+  //   },
+  //   {
+  //     _id: '5',
+  //     userId: '22',
+  //     restaurantId: 'asasdadw',
+  //     createdAt: '11:00',
+  //     items: [
+  //       {
+  //         _id: 1,
+  //         name: 'Ice Cream',
+  //         quantity: 1,
+  //         price: 80,
+  //         isPreparing: true,
+  //         isPrepared: true,
+  //         isServed: true,
+  //       },
+  //     ],
+  //     tableNumber: 2,
+  //     total: 80,
+  //   },
+  // ];
+  const orders = useSelector((state) => state.order.orders);
   const name = useSelector((state) => state.restaurant.restaurantName);
   const email = useSelector((state) => state.signin.email);
   const phone_number = useSelector((state) => state.signin.phone_number)
@@ -151,6 +152,7 @@ function OrdersScreen({navigation}) {
   const customerName = useSelector((state) => state.signin.customerName);
   const total = useSelector((state) => state.cart.totalPrice);
   const onDismissSnackBar = () => setShowSnackbar(false);
+  var mee = useSelector((state) => state.signin.token);
   const handlePayment = () => {
     var options = {
       description: 'Secure Payment to FoodPal',
@@ -179,7 +181,13 @@ function OrdersScreen({navigation}) {
     });
     
   }
-  
+  const caller = () => {
+    dispatch(getOrder(mee));
+  }
+  useEffect(()=>{
+    console.log(mee);
+    caller();
+  }, [])
   const handleOrdermore= () => {
     dispatch(clear());
     // navigation.navigate('MenuScreen');
@@ -195,7 +203,7 @@ function OrdersScreen({navigation}) {
     
   }
   return (
-    <ScrollView>
+    <View>
       <Text style={{alignSelf:"center", margin: 20, fontSize: 24}}>Orders Screen</Text>
       <FlatList
         data={orders}
@@ -243,7 +251,7 @@ function OrdersScreen({navigation}) {
         }}>
         Payment Successfully Completed
       </Snackbar>
-    </ScrollView>
+    </View>
   );
 }
 const styles = StyleSheet.create({

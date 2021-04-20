@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
+import blogSlice from '../reducers/blogSlice'
 import cartSlice from '../reducers/cartSlice'
+import orderSlice from '../reducers/orderSlice'
 import placeOrderSlice from '../reducers/placeOrderSlice'
 import restaurantSlice from '../reducers/restaurantSlice'
 import scanSlice from '../reducers/scanSlice'
@@ -14,7 +16,9 @@ export default configureStore({
         signup: signupSlice,
         cart: cartSlice,
         placeorder: placeOrderSlice,
-        scan: scanSlice
+        scan: scanSlice,
+        order: orderSlice,
+        blog: blogSlice,
     },
   middleware:  (getDefaultMiddleware) =>
   getDefaultMiddleware({

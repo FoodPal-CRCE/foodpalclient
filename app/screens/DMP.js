@@ -4,8 +4,7 @@ import { Button, Appbar} from 'react-native-paper';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker' 
 //Firebase Initializations
 import firebase from 'firebase';
-import firebaseConfig from '../firebaseconfig/firebaseConfig';
-firebase.initializeApp(firebaseConfig);
+
 db = firebase.storage();
 
 function DMP({navigation}) {

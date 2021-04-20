@@ -5,8 +5,10 @@ import {TextInput, Button} from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { authenticator } from '../reducers/signinSlice';
 import Connector from '../utils/Connector';
-
-
+import firebase from 'firebase';
+import firebaseConfig from '../firebaseconfig/firebaseConfig';
+firebase.initializeApp(firebaseConfig);
+firebase.firestore().settings({ experimentalForceLongPolling: true });
 function LoginScreen({navigation}) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');

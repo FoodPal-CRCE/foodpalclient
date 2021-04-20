@@ -52,7 +52,7 @@ function CartScreen({navigation}) {
     console.log('Array:  ', items);
   });
   const handleButton = () => {
-    // dispatch(placeOrder({doc: finalDoc, mee: mee}))
+    dispatch(placeOrder({doc: finalDoc, mee: mee}))
     //Uncomment this.
     navigation.navigate('OrdersScreen');
   }
