@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { View, Text, Image } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getCustomer, saveme } from '../reducers/signinSlice';
 
-
-export default class OnboardingUI extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
+function OnboardingUI({navigation}) {
+  const dispatch = useDispatch();
+  const caller = async () => {
+    const data = await AsyncStorage.getItem('me');
+    console.log(data);
+    dispatch(getCustomer(data));
+    dispatch(saveme(data));
+    navigation.navigate('AppNavigator');
   }
-
-  render() {
-    return (
-<Onboarding
-    onDone={()=> this.props.navigation.replace('SplashScreen')}
-    onSkip={()=> this.props.navigation.replace('SplashScreen')}
+  useEffect(()=>{
+    caller();
+  }, [])
+  return (
+    <Onboarding
+    onDone={()=> navigation.replace('SplashScreen')}
+    onSkip={()=> navigation.replace('SplashScreen')}
   pages={[
     {
       backgroundColor: '#fff',
@@ -37,6 +43,7 @@ export default class OnboardingUI extends Component {
 
   ]}
 />
-    );
-  }
+  );
 }
+
+export default OnboardingUI;

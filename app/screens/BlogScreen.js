@@ -9,8 +9,9 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
 //Firebase Initializations
 import firebase from 'firebase';
 import { useDispatch } from 'react-redux';
-import {uploadDoc} from '../reducers/blogSlice'
+import {getBlogs, uploadDoc} from '../reducers/blogSlice'
 import { mdiSleep } from '@mdi/js';
+import { useEffect } from 'react';
 const db = firebase.firestore();
 const posts = [
   {
@@ -142,19 +143,13 @@ function BlogScreen({navigation}) {
     setDescription('');
     setDish('');
   }
-  const firebaseWorks = async (url) => {
-    console.log("Firebase Works: ",url);
-    const doc = {
-      title: title,
-      description: description,
-      url: imageUrl
-    }
-    const res = db.collection(dish).doc().set(doc);
-    console.log(doc);
-    console.log(res);
-    setNum(1);
-    setProgressBarVisible(false);
+  //Get blogs
+  const caller = () => {
+    dispatch(getBlogs());
   }
+  useEffect(() => {
+    caller();
+  }, [])
   return (
     <View style={styles.container}>
       <Appbar.Header>
@@ -224,7 +219,7 @@ function BlogScreen({navigation}) {
                 style={{marginBottom: "10%"}}
                 value={title}
                 onChangeText = {text=>setTitle(text)}
-                mode="outlined"
+                mode="flat"
             />
 
             <TextInput
@@ -234,12 +229,14 @@ function BlogScreen({navigation}) {
                 style={{marginBottom: "10%"}}
                 value={description}
                 onChangeText = {text=>setDescription(text)}
-                mode="outlined"
+                mode="flat"
             />
             <Menu 
               visible={visibleMenu}
               onDismiss={closeMenu}
-              anchor={<Button style={{marginBottom: "10%"}} mode="contained" onPress={openMenu}>Dish Type</Button>}
+              anchor={
+              <Button style={{marginBottom: "10%"}} mode="contained" onPress={openMenu}>
+                Dish Type</Button>}
               
             >
               <Menu.Item onPress={() => {
@@ -259,7 +256,7 @@ function BlogScreen({navigation}) {
             <ProgressBar 
               visible={progressBarVisible}
               progress={num}
-              color={Colors.blue800}
+              color={Colors.theme}
             />
             </ScrollView>
         </Modal>

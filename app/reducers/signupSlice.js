@@ -16,7 +16,7 @@ import {
         //We can have axios calls in one file like we did.
         const data = await axios({
             method: 'POST',
-            url: 'http://Foodpalbackend-env.eba-wsvaa3rp.ap-south-1.elasticbeanstalk.com/customer/signup',
+            url: 'http://Foodpalbackend1-env.eba-tsnmuk5c.ap-south-1.elasticbeanstalk.com/customer/signup',
             data:{
                 email: values.email,
                 password: values.password,

@@ -8,7 +8,7 @@ import {
 // import { AsyncStorage } from 'react-native';
 
   export const authenticator = createAsyncThunk(
-    'restaurant/signin',
+    'customer/signin',
     async (values, thunkAPI) => {
         console.log('Email:',values.email);
         console.log(values.password);
@@ -16,7 +16,7 @@ import {
         //We can have axios calls in one file like we did.
         const data = await axios({
             method: 'POST',
-            url: 'http://Foodpalbackend-env.eba-wsvaa3rp.ap-south-1.elasticbeanstalk.com/customer/signin',
+            url: 'http://Foodpalbackend1-env.eba-tsnmuk5c.ap-south-1.elasticbeanstalk.com/customer/signin',
             data:{
                 email: values.email,
                 password: values.password,
@@ -25,9 +25,6 @@ import {
             // console.log(response.data);
             // localStorage.setItem("authToken", response.data.accessToken)
             if(response.status === 200){
-            // localStorage.setItem("me", JSON.stringify(response.data))
-            // console.log(response.data);
-            //Async store krenge idhr
             console.log('Ho gya')
             console.log("Access Token::",response.data.accessToken);
             await AsyncStorage.setItem("me", JSON.stringify(response.data.accessToken))
@@ -54,7 +51,25 @@ import {
     }
 )
 
-
+    export const getCustomer = createAsyncThunk(
+      'customer/get', 
+      async (values, {rejectWithValue}) => {
+        try{
+          const data = await axios({
+            method: 'GET',
+            url: 'http://Foodpalbackend1-env.eba-tsnmuk5c.ap-south-1.elasticbeanstalk.com/customer/get',
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": values
+            }
+          })
+          return data;
+        }
+        catch(err){
+          return rejectWithValue(err);
+        }
+      }
+    )
   const signinSlice = createSlice({
       name: 'auth',
       initialState: {
@@ -70,8 +85,8 @@ import {
       reducers: {
           saveme: (state, action) => {
             //This accepts me object and saves it to state
-            console.log(action.payload.data);
-            state.me=action.payload;
+            console.log(action.payload);
+            state.token=action.payload;
           },
           authenticate: (state, action) =>{
               //This sets isLoggedin to turu
@@ -82,7 +97,8 @@ import {
             //This sets isLoggedIn to Falase
             console.log("Bulaya gaya");
             state.isLoggedIn=false;
-          }
+          },
+
       },
       extraReducers:{
           [authenticator.fulfilled]: (state, {payload}) => {
@@ -94,7 +110,8 @@ import {
               // console.log(state.me.data.customer['name']);
               state.customerName = payload.data.customer['name']; 
               state.phone_number = payload.data.customer['phone_number'];
-              state.email = payload.data.customer['email'];    
+              state.email = payload.data.customer['email'];
+              // AsyncStorage.setItem('me', payload.data.accessToken);    
           },
           [authenticator.rejected]: (state, action) => {
             //   console.log(action);
@@ -102,6 +119,14 @@ import {
           },
           [authenticator.pending]: (state, action) =>{
             console.log('Authentication in process');
+          },
+          [getCustomer.fulfilled]: (state, {payload}) => {
+            console.log(payload.data["_id"]);
+            state.id = payload.data["_id"];
+            state.email = payload.data["email"];
+            state.customerName = payload.data["name"];
+            state.isLoggedIn = true;
+            state.phone_number = payload.data["phone_number"]
           }
       }
 })

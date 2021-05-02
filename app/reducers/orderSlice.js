@@ -9,7 +9,7 @@ import {
     'orders/get',
     async (value,{rejectWithValue}) => {
         console.log("Called Thunk");
-        const url = 'http://Foodpalbackend-env.eba-wsvaa3rp.ap-south-1.elasticbeanstalk.com/orders/customer' ;
+        const url = 'http://Foodpalbackend1-env.eba-tsnmuk5c.ap-south-1.elasticbeanstalk.com/orders/customer' ;
         
         console.log("Token",value);
         try{

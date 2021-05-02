@@ -11,17 +11,31 @@ export const uploadDoc = createAsyncThunk(
         console.log(values);
         console.log(values.dish);
         try{
-            db.collection(values.dish).doc().set(values);
+            db.collection("Blogs").doc().set(values);
         }catch(err){
             return rejectedWithValue(err);
         }
 
     }
 )
+export const getBlogs = createAsyncThunk(
+    'blog/get',
+    async (values, {rejectedWithValue}) => {
+        try{
+            const arr = [];
+            const data = await db.collection("Blogs").get();
+            // console.log(data)
+            return data;
+        }catch(err){
+            return rejectedWithValue(err);
+        }
+    }
+)
 const blogSlice = createSlice({
     name: "Blogs",
     initialState: {
         data: '',
+        blogs: null,
     }, 
     reducers: {
 
@@ -29,7 +43,13 @@ const blogSlice = createSlice({
     extraReducers: {
         [uploadDoc.fulfilled]: (state, action) => {
             console.log(action)
-        }   
+        },
+        [getBlogs.fulfilled]: (state, action) => {
+            // console.log(action.payload);
+            action.payload.forEach((doc) => {
+                console.log(doc)
+            })
+        } 
     }
 })
 
