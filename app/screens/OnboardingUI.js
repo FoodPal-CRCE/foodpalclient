@@ -8,11 +8,13 @@ import { getCustomer, saveme } from '../reducers/signinSlice';
 function OnboardingUI({navigation}) {
   const dispatch = useDispatch();
   const caller = async () => {
-    const data = await AsyncStorage.getItem('me');
-    console.log(data);
-    dispatch(getCustomer(data));
-    dispatch(saveme(data));
-    navigation.navigate('AppNavigator');
+    if(await AsyncStorage.getItem('me') !== null){ 
+      const data = await AsyncStorage.getItem('me');
+      console.log(data);
+      dispatch(getCustomer(data));
+      dispatch(saveme(data));
+      navigation.navigate('AppNavigator');
+    }
   }
   useEffect(()=>{
     caller();

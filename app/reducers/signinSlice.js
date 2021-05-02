@@ -27,7 +27,7 @@ import {
             if(response.status === 200){
             console.log('Ho gya')
             console.log("Access Token::",response.data.accessToken);
-            await AsyncStorage.setItem("me", JSON.stringify(response.data.accessToken))
+            // await AsyncStorage.setItem("me", JSON.stringify(response.data.accessToken))
             
             }
             else{
@@ -54,6 +54,7 @@ import {
     export const getCustomer = createAsyncThunk(
       'customer/get', 
       async (values, {rejectWithValue}) => {
+        console.log("Token getCustomer: ", values);
         try{
           const data = await axios({
             method: 'GET',
@@ -111,7 +112,7 @@ import {
               state.customerName = payload.data.customer['name']; 
               state.phone_number = payload.data.customer['phone_number'];
               state.email = payload.data.customer['email'];
-              // AsyncStorage.setItem('me', payload.data.accessToken);    
+              AsyncStorage.setItem('me', payload.data.accessToken);    
           },
           [authenticator.rejected]: (state, action) => {
             //   console.log(action);
