@@ -9,13 +9,16 @@ import {
 } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useSelector } from 'react-redux';
 
 
 
 
 const ProfileScreen = () => {
 
-  
+  const name = useSelector((state) => state.signin.customerName)  
+  const phone_number = useSelector((state) => state.signin.phone_number);
+  const email = useSelector((state) => state.signin.email);
   return (
     <SafeAreaView style={styles.container}>
 
@@ -25,7 +28,7 @@ const ProfileScreen = () => {
                 <Title style={[styles.title, {
                 marginTop:15,
                 marginBottom: 5,
-                }]}>John Doe</Title>
+                }]}>{name}</Title>
                 
             </View>
         </View>
@@ -38,11 +41,11 @@ const ProfileScreen = () => {
         </View>
         <View style={styles.row}>
           <Icon name="phone" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>+91-900000009</Text>
+          <Text style={{color:"#777777", marginLeft: 20}}>{phone_number}</Text>
         </View>
         <View style={styles.row}>
           <Icon name="email" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>john_doe@email.com</Text>
+          <Text style={{color:"#777777", marginLeft: 20}}>{email}</Text>
         </View>
       </View>
 

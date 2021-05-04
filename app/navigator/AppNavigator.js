@@ -20,7 +20,7 @@ const AppNavigator = () => {
     return(
     <Tab.Navigator tabBarOptions={{
         activeTintColor: "#6617F5",
-        inactiveTintColor: "white",
+        inactiveTintColor: "black",
         style:{
             height: "8%"
         }
@@ -106,7 +106,8 @@ const AppNavigator = () => {
                         alignSelf: 'center',
                         display: "flex",
                         flex: 1,
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        tintColor: 'white'
                         
                     }
                 }

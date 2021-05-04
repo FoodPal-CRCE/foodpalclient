@@ -9,7 +9,7 @@ import {
       'restaurant/getAll',
       async(value, {rejectWithValue}) => {
           console.log("Inside Thunk");
-          const url = "http://Foodpalbackend1-env.eba-tsnmuk5c.ap-south-1.elasticbeanstalk.com/restaurant/all";
+          const url = "http://Foodpalbackend-env.eba-nevmpxfx.ap-south-1.elasticbeanstalk.com/restaurant/all";
           try{
             const data = await axios({
                 method: "GET",
@@ -31,7 +31,7 @@ import {
     'restaurant/get',
     async (value,{rejectWithValue}) => {
         console.log("Called Thunk");
-        const url = 'http://Foodpalbackend1-env.eba-tsnmuk5c.ap-south-1.elasticbeanstalk.com/customer/get/restaurant/' + value.id;
+        const url = 'http://Foodpalbackend-env.eba-nevmpxfx.ap-south-1.elasticbeanstalk.com/customer/get/restaurant/' + value.id;
         
         console.log("Token",value);
         try{

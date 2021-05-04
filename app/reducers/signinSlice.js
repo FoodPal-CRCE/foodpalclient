@@ -16,7 +16,7 @@ import {
         //We can have axios calls in one file like we did.
         const data = await axios({
             method: 'POST',
-            url: 'http://Foodpalbackend1-env.eba-tsnmuk5c.ap-south-1.elasticbeanstalk.com/customer/signin',
+            url: 'http://Foodpalbackend-env.eba-nevmpxfx.ap-south-1.elasticbeanstalk.com/customer/signin',
             data:{
                 email: values.email,
                 password: values.password,
@@ -58,7 +58,7 @@ import {
         try{
           const data = await axios({
             method: 'GET',
-            url: 'http://Foodpalbackend1-env.eba-tsnmuk5c.ap-south-1.elasticbeanstalk.com/customer/get',
+            url: 'http://Foodpalbackend-env.eba-nevmpxfx.ap-south-1.elasticbeanstalk.com/customer/get',
             headers: {
               "Content-Type": "application/json",
               "x-access-token": values
