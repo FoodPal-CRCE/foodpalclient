@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 
 
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
 
   const name = useSelector((state) => state.signin.customerName)  
   const phone_number = useSelector((state) => state.signin.phone_number);
@@ -77,7 +77,7 @@ const ProfileScreen = () => {
           </View>
         </TouchableRipple>
        
-        <TouchableRipple onPress={() => {}}>
+        <TouchableRipple onPress={() => {navigation.navigate('SupportScreen')}}>
           <View style={styles.menuItem}>
             <Icon name="account-check-outline" color="#6617f5" size={25}/>
             <Text style={styles.menuItemText}>Support</Text>

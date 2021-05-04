@@ -12,6 +12,7 @@ import {TouchableOpacity, StyleSheet, View, Image, Text} from 'react-native'
 import OrdersScreen from '../screens/OrdersScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import DMP from '../screens/DMP';
+import ProfileNavigator from './ProfileNavigator';
 // import { mdiQrcodeScan } from '@mdi/js';
 const Tab = createBottomTabNavigator();
 
@@ -142,7 +143,7 @@ const AppNavigator = () => {
          
          <Tab.Screen 
         name="Profile" 
-        component={ProfileScreen}
+        component={ProfileNavigator}
         options={{
             tabBarIcon: ({focused}) => (
                 <View style={styles.screenContainer}>

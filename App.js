@@ -8,7 +8,7 @@ import AuthNavigator from './app/navigator/authNavigator';
 import {Provider} from 'react-redux';
 //import { createStore } from "redux";
 import store from './app/utils/store';
-
+console.warn = () => {}
 export default function App() {
   //const store = createStore(authReducer);
   return (

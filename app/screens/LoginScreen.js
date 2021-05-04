@@ -25,7 +25,13 @@ function LoginScreen({navigation}) {
   useEffect(()=>{
     // console.log('Yeh hai:',islogged);
     if(islogged== true){
-      navigation.navigate('AppNavigator');
+      navigation.reset({
+        index: 0,
+        routes: [
+          {name: 'AppNavigator'}
+        ],
+        
+      })
     }
   }, [islogged])
 

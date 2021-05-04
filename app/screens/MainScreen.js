@@ -5,10 +5,7 @@ export default function MainScreen({navigation}) {
     return (
       <View>
       <Appbar.Header>
-      <Appbar.BackAction/>
       <Appbar.Content title="QR Scanner" subtitle="Order at desired Restaurant" />
-      <Appbar.Action icon="magnify" />
-      <Appbar.Action icon="dots-vertical" />
     </Appbar.Header>
         <View>
           <Button style={styles.btn} contentStyle={{height: 50}} mode="contained" onPress={() =>navigation.navigate('ScanScreen')}>
