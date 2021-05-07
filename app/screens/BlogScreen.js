@@ -8,75 +8,78 @@ import { FAB,Button,TextInput, Provider, Portal, Appbar, Modal, Menu, Divider, P
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker' 
 //Firebase Initializations
 import firebase from 'firebase';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {getBlogs, uploadDoc} from '../reducers/blogSlice'
 import { mdiSleep } from '@mdi/js';
 import { useEffect } from 'react';
 const db = firebase.firestore();
-const posts = [
-  {
-    _id: 1,
-    title: 'My New Dish',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
-    uri:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
-    username: 'Darween Barbutza',
-    location: 'Mumbai',
-  },
-  {
-    _id: 2,
-    title: 'My New Dish',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
-    uri:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
-    username: 'Darween Barbutza',
-    location: 'Mumbai',
-  },
-  {
-    _id: 3,
-    title: 'My New Dish',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
-    uri:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
-    username: 'Darween Barbutza',
-    location: 'Mumbai',
-  },
-  {
-    _id: 4,
-    title: 'My New Dish',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
-    uri:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
-    username: 'Darween Barbutza',
-    location: 'Mumbai',
-  },
-  {
-    _id: 5,
-    title: 'My New Dish',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
-    uri:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
-    username: 'Darween Barbutza',
-    location: 'Mumbai',
-  },
-  {
-    _id: 6,
-    title: 'My New Dish',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
-    uri:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
-    username: 'Darween Barbutza',
-    location: 'Mumbai',
-  },
-];
+// const posts = [
+//   {
+//     _id: 1,
+//     title: 'My New Dish',
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
+//     uri:
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
+//     username: 'Darween Barbutza',
+//     location: 'Mumbai',
+//   },
+//   {
+//     _id: 2,
+//     title: 'My New Dish',
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
+//     uri:
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
+//     username: 'Darween Barbutza',
+//     location: 'Mumbai',
+//   },
+//   {
+//     _id: 3,
+//     title: 'My New Dish',
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
+//     uri:
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
+//     username: 'Darween Barbutza',
+//     location: 'Mumbai',
+//   },
+//   {
+//     _id: 4,
+//     title: 'My New Dish',
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
+//     uri:
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
+//     username: 'Darween Barbutza',
+//     location: 'Mumbai',
+//   },
+//   {
+//     _id: 5,
+//     title: 'My New Dish',
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
+//     uri:
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
+//     username: 'Darween Barbutza',
+//     location: 'Mumbai',
+//   },
+//   {
+//     _id: 6,
+//     title: 'My New Dish',
+//     description:
+//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Augue mauris augue neque gravida in fermentum et. Non curabitur gravida arcu ac tortor dignissim. Ut sem viverra aliquet eget sit amet. Faucibus scelerisque eleifend donec pretium vulputate. Tellus rutrum tellus pellentesque eu tincidunt. Et malesuada fames ac turpis. Suscipit adipiscing bibendum est ultricies integer. Nulla porttitor massa id neque aliquam vestibulum morbi blandit. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Fermentum leo vel orci porta non pulvinar. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo.',
+//     uri:
+//       'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/220px-Good_Food_Display_-_NCI_Visuals_Online.jpg',
+//     username: 'Darween Barbutza',
+//     location: 'Mumbai',
+//   },
+// ];
 
 function BlogScreen({navigation}) {
+  //Blogs from state
+  const posts = useSelector((state) => state.blog.blogs)
+  console.log(posts);
   //Redux Initializations
   const dispatch = useDispatch();
   //FAB Initializations
@@ -158,14 +161,14 @@ function BlogScreen({navigation}) {
       </Appbar.Header>
       <FlatList
         data={posts}
-        keyExtractor={(posts) => posts._id.toString()}
+        keyExtractor={(posts) => posts.url}
         renderItem={({item}) => (
           <BlogCard
             title={item.title}
-            location={item.location}
-            username={item.username}
-            image={{uri: item.uri}}
-            onPress={() => navigation.navigate('BlogDetailsScreen', item)}
+            location={item.description}
+            username={item.dish}
+            image={{uri: item.url}}
+            navigation={navigation}
           />
         )}
       />

@@ -81,6 +81,7 @@ function OrdersScreen({navigation}) {
             time={item.createdAt}
             tableNumber={item.tableNumber}
             item={item}
+            navigation={navigation}
           />
         )}
       />

@@ -81,7 +81,8 @@ import {
           id: '',
           customerName: '',
           phone_number: '',
-          email: ''
+          email: '',
+          city: '',
       },
       reducers: {
           saveme: (state, action) => {
@@ -98,6 +99,7 @@ import {
             //This sets isLoggedIn to Falase
             console.log("Bulaya gaya");
             state.isLoggedIn=false;
+            AsyncStorage.removeItem('me');
           },
 
       },

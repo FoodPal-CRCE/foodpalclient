@@ -13,11 +13,20 @@ import OrdersScreen from '../screens/OrdersScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import DMP from '../screens/DMP';
 import ProfileNavigator from './ProfileNavigator';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import OrdersNavigator from '../navigator/OrdersNavigator'
 // import { mdiQrcodeScan } from '@mdi/js';
 const Tab = createBottomTabNavigator();
 
-const AppNavigator = () => {
+const AppNavigator = ({navigation}) => {
     const [hider, setHider] = useState(false);
+    const islogged = useSelector((state) => state.signin.isLoggedIn)
+    useEffect(()=>{
+        // if(!islogged){
+        //     navigation.navigate("InitialScreen");
+        // }
+    })
     return(
     <Tab.Navigator tabBarOptions={{
         activeTintColor: "#6617F5",
@@ -121,7 +130,7 @@ const AppNavigator = () => {
 
         <Tab.Screen 
         name="Orders" 
-        component={OrdersScreen}
+        component={OrdersNavigator}
         options={{
             tabBarIcon: ({focused}) => (
                 <View style={styles.screenContainer}>

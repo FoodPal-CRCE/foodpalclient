@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Image} from 'react-native';
 import {Title, Paragraph, Button} from 'react-native-paper';
 
-function OrderCard({time, total, tableNumber, item}) {
+function OrderCard({time, total, tableNumber, item, navigation}) {
   return (
     <View style={styles.root}>
       <Image
@@ -16,7 +16,7 @@ function OrderCard({time, total, tableNumber, item}) {
         <Paragraph>Table: {tableNumber}</Paragraph>
         <Paragraph>Total: {total}</Paragraph>
         <View style={styles.actions}>
-          <Button icon="chevron-triple-right" onPress={() => {}}>
+          <Button icon="chevron-triple-right" onPress={() => {navigation.navigate('OrderDetailsScreen', order={item})}}>
             View
           </Button>
         </View>

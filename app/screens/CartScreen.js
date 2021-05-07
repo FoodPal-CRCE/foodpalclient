@@ -19,6 +19,7 @@ function CartScreen({navigation}) {
   const dispatch = useDispatch();
   var finalDoc;
   var total = useSelector((state) => state.cart.localTotal);
+  const restaurantName = useSelector((state) => state.restaurant.restaurantName)
   const [items, setItems] = useState([]);
   const [ren, setRen] = useState(false);
   const dataMake = () => {
@@ -43,6 +44,7 @@ function CartScreen({navigation}) {
       restaurantId: id,
       tableNumber: tableNumber,
       items: items,
+      // restaurantName: restaurantName
     };
     console.log('Final Document: ', finalDoc);
   };

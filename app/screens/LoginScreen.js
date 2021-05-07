@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useEffect } from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, ActivityIndicator} from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { authenticator } from '../reducers/signinSlice';
@@ -9,22 +9,17 @@ import firebase from 'firebase';
 import firebaseConfig from '../firebaseconfig/firebaseConfig';
 firebase.initializeApp(firebaseConfig);
 firebase.firestore().settings({ experimentalForceLongPolling: true });
+
 function LoginScreen({navigation}) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [showloader, setShowLoader] = useState(false);
   const dispatch = useDispatch();
   const islogged = useSelector((state) => state.signin.isLoggedIn)
   const login= async() => {
-    const values = {
-      email: userName,
-      password: password
-    }
-    dispatch(await authenticator(values));
-    
-  }
-  useEffect(()=>{
-    // console.log('Yeh hai:',islogged);
-    if(islogged== true){
+    setShowLoader(true);
+    setTimeout(() => {
+      setShowLoader(false)
       navigation.reset({
         index: 0,
         routes: [
@@ -32,9 +27,15 @@ function LoginScreen({navigation}) {
         ],
         
       })
+    }, 1500)
+    const values = {
+      email: userName,
+      password: password
     }
-  }, [islogged])
-
+    dispatch(await authenticator(values));
+    
+    
+  }
   return (
     <View style={styles.main}>
       <Image source={require('../assets/logo.png')} style={styles.img} />
@@ -64,7 +65,7 @@ function LoginScreen({navigation}) {
           }}>
           Submit
         </Button>
-
+         {/* <ActivityIndicator size="large" /> */}
         <View style={styles.signupText}>
           <Text>
             Don't have account?{' '}

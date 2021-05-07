@@ -33,6 +33,7 @@ export default function ScanScreen({navigation}){
  
     return (
         <QRCodeScanner
+        showMarker
         onRead={onSuccess}
         topContent={
           <Text style={styles.centerText}>

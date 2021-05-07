@@ -24,19 +24,24 @@ function SupportScreen() {
             id: '4',
             
             options: [
-                {value: 1, label: "Help Me", trigger: '5'},
+                {value: 1, label: "Know the Developers", trigger: '5'},
                 {value: 2, label: "I want to order", trigger: '6'}
             ]
             
         },
         {
             id: '5',
-            message: 'Oh fuck you',
-            end: true
+            message: 'MSD has developed this application keeping Human Machine Interaction in mind!!',
+            trigger: '7'
         },
         {
             id: '6',
             message: "Go to Scan QR Code and Order",
+            end: true
+        },
+        {
+            id: '7',
+            message: 'Order some food go to Scan QR code!!',
             end: true
         }
     ]

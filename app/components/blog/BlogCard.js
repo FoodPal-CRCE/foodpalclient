@@ -5,9 +5,14 @@ import Text from '../Text';
 import colors from '../../config/colors';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
-function EventCard({title, location, username, image}) {
+function EventCard({title, location, username, image, navigation}) {
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={()=> {navigation.navigate('BlogDetailsScreen', {
+      uri: image,
+      title,
+      location,
+      username
+    })}}>
       <View style={styles.card}>
         <Image style={styles.image} source={image} />
         <View style={styles.detailsContainer}>

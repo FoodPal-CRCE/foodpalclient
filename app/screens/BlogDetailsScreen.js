@@ -3,7 +3,8 @@ import {View, Image, StyleSheet} from 'react-native';
 
 import colors from '../config/colors';
 import Text from '../components/Text';
-import {Icon} from '@mdi/react';
+// import {Icon} from '@mdi/react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 function BlogDetailsScreen({route}) {
   const listing = route.params;
@@ -21,16 +22,16 @@ function BlogDetailsScreen({route}) {
 
   return (
     <View>
-      <Image style={styles.image} source={{uri: listing.uri}} />
+      <Image style={styles.image} source={listing.uri} />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{listing.title}</Text>
         <Text style={styles.location}>
-          <Icon path={mdiAccountSearch} />
-          {listing.location}
+        <Icon name="credit-card" color="#6617f5" size={25}/>
+            {listing.location}
         </Text>
         <Text style={styles.details}>
-          <Icon path={mdiAccount} />
-          {listing.username}
+          
+          <Icon name="account-check-outline" color="#6617f5" size={25}/> {listing.username}
         </Text>
       </View>
     </View>

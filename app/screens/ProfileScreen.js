@@ -9,7 +9,8 @@ import {
 } from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { unAuthenticate } from '../reducers/signinSlice';
 
 
 
@@ -19,6 +20,11 @@ const ProfileScreen = ({navigation}) => {
   const name = useSelector((state) => state.signin.customerName)  
   const phone_number = useSelector((state) => state.signin.phone_number);
   const email = useSelector((state) => state.signin.email);
+  const dispatch = useDispatch();
+  const handleSignout = () => {
+    dispatch(unAuthenticate());
+  }
+
   return (
     <SafeAreaView style={styles.container}>
 
@@ -81,6 +87,13 @@ const ProfileScreen = ({navigation}) => {
           <View style={styles.menuItem}>
             <Icon name="account-check-outline" color="#6617f5" size={25}/>
             <Text style={styles.menuItemText}>Support</Text>
+          </View>
+        </TouchableRipple>
+
+        <TouchableRipple onPress={() => {handleSignout()}}>
+          <View style={styles.menuItem}>
+            <Icon name="logout" color="#6617f5" size={25}/>
+            <Text style={styles.menuItemText}>Sign Out</Text>
           </View>
         </TouchableRipple>
         

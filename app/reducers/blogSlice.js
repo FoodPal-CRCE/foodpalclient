@@ -24,8 +24,11 @@ export const getBlogs = createAsyncThunk(
         try{
             const arr = [];
             const data = await db.collection("Blogs").get();
-            // console.log(data)
-            return data;
+            data.forEach((doc) => {
+                arr.push(doc.data());
+            })
+            console.log(arr);
+            return arr;
         }catch(err){
             return rejectedWithValue(err);
         }
@@ -36,6 +39,7 @@ const blogSlice = createSlice({
     initialState: {
         data: '',
         blogs: null,
+        index: 0,
     }, 
     reducers: {
 
@@ -45,10 +49,7 @@ const blogSlice = createSlice({
             console.log(action)
         },
         [getBlogs.fulfilled]: (state, action) => {
-            // console.log(action.payload);
-            action.payload.forEach((doc) => {
-                console.log(doc)
-            })
+            state.blogs=action.payload;
         } 
     }
 })

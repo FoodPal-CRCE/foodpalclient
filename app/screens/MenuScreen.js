@@ -29,7 +29,7 @@ export default function MenuScreen({navigation, route}) {
             </Appbar.Header>
 
             <MenuList />
-            <Button onPress={() => navigation.navigate("CartScreen")} style={{marginBottom: "20%"}}>View Cart</Button>
+            <Button mode="contained" onPress={() => navigation.navigate("CartScreen")} style={{marginBottom: "20%"}}>View Cart</Button>
         </View>
     )
 }
