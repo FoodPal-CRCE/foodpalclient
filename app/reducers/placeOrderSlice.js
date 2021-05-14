@@ -33,13 +33,15 @@ export const placeOrder = createAsyncThunk(
       name: "Restaurant",
       initialState: {
         placed: false,
+        order_id: '',
       },
       reducers:{
 
       },
       extraReducers:{
         [placeOrder.fulfilled]: (state, action) => {
-            console.log("FInalllyy Found you");
+            console.log("Order ID: ",action.payload.data);
+            state.order_id = action.payload.data;
             //Loader = false;
             //Toast = true <Button title="Track Your Order"/>
         },

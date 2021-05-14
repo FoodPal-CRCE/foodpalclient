@@ -15,6 +15,7 @@ import DMP from '../screens/DMP';
 import ProfileNavigator from './ProfileNavigator';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import DMPNavigator from '../navigator/DMPNavigator';
 import OrdersNavigator from '../navigator/OrdersNavigator'
 // import { mdiQrcodeScan } from '@mdi/js';
 const Tab = createBottomTabNavigator();
@@ -39,7 +40,7 @@ const AppNavigator = ({ navigation }) => {
         >
             <Tab.Screen
                 name="DMP"
-                component={DMP}
+                component={DMPNavigator}
                 options={{
                     // tabBarIcon: ({color,size}) => <Icon name="rocket" size={30} color="#900" />
                     tabBarIcon: ({ focused }) => (

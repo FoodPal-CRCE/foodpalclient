@@ -30,7 +30,13 @@ function DMP({ navigation }) {
   }
   const getDishData = async (name) => {
     await db.collection("recipes").doc(name).get().then((doc) => {
-      console.log(doc.data());
+      console.log(doc.data().url);
+      navigation.navigate('DMPDetails', {
+        image: doc.data().url,
+        Name: doc.data().Name,
+        ingredients: doc.data().Ingredients,
+        origin: doc.data().Origin
+      })
     })
   }
   const uploadImage = async (uri) => {

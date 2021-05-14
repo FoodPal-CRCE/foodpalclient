@@ -4,9 +4,9 @@ import {Button, Snackbar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import OrderCard from '../components/orders/OrderCard'
 import { clear } from '../reducers/cartSlice';
-import RazorpayCheckout from "react-native-razorpay";
+
 import axios from 'axios';
-import {getOrder} from '../reducers/orderSlice'
+import {getOrder, updateIsPaid} from '../reducers/orderSlice'
 function OrdersScreen({navigation}) {
   const orders = useSelector((state) => state.order.orders);
   const name = useSelector((state) => state.restaurant.restaurantName);
@@ -20,34 +20,7 @@ function OrdersScreen({navigation}) {
   const total = useSelector((state) => state.cart.totalPrice);
   const onDismissSnackBar = () => setShowSnackbar(false);
   var mee = useSelector((state) => state.signin.token);
-  const handlePayment = () => {
-    var options = {
-      description: 'Secure Payment to FoodPal',
-      image: 'https://i.imgur.com/3g7nmJC.png',
-      currency: 'INR',
-      key: 'rzp_test_3H6qUplmbWeOGd',
-      amount: total+'00',
-      name: name,
-      order_id: order,
-      prefill: {
-        email: email,
-        contact: phone_number,
-        name: customerName
-      },
-      theme: {color: '#6716F7'}
-    }
-    RazorpayCheckout.open(options).then((data) => {
-      // handle success
-      // alert(`Success: ${data.razorpay_payment_id}`);
-      //setRen(true);
-      setShowSnackbar(true);
-    }).catch((error) => {
-      // handle failure
-      alert(`Error: ${error.code} | ${error.description}`);
-      console.log(error);
-    });
-    
-  }
+
   const caller = () => {
     dispatch(getOrder(mee));
   }
@@ -55,20 +28,8 @@ function OrdersScreen({navigation}) {
     console.log(mee);
     caller();
   }, [])
-  const handleOrdermore= () => {
-    dispatch(clear());
-    // navigation.navigate('MenuScreen');
-    navigation.reset({
-      routes: [
-        {name: 'MenuScreen'}
-      ],
-      
-    })
-  }
-  const handleOk = async () => {
-    dispatch(await clear());
-    
-  }
+  
+  
   return (
     <View style={{height: "100%"}}>
       <Text style={{alignSelf:"center", margin: 20, fontSize: 24}}>Orders Screen</Text>
@@ -85,40 +46,8 @@ function OrdersScreen({navigation}) {
           />
         )}
       />
-      <View>
-          <Button
-            icon="credit-card-marker-outline"
-            mode="contained"
-            onPress={() => handlePayment()}
-            style={styles.pay}>
-            Pay Now
-          </Button>
-          <Button
-            icon="plus-circle-outline"
-            mode="contained"
-            onPress={() => handleOrdermore()}
-            style={styles.orderMore}>
-            Order More
-          </Button>
-      </View>
-      <Snackbar
-        visible={showsnackbar}
-        onDismiss={onDismissSnackBar}
-        duration={5000}
-        action={{
-          label: 'Ok',
-          onPress: async() => {
-            await handleOk()
-            navigation.reset({
-              routes: [
-                {name: 'MainScreen'}
-              ],
-              
-            })
-          },
-        }}>
-        Payment Successfully Completed
-      </Snackbar>
+      
+      
     </View>
   );
 }
