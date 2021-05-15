@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, ScrollView, FlatList, StyleSheet, TouchableHighlight} from 'react-native';
-import {Button, Snackbar } from 'react-native-paper';
+import {Button, Snackbar, Appbar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import OrderCard from '../components/orders/OrderCard'
 import { clear } from '../reducers/cartSlice';
@@ -32,14 +32,16 @@ function OrdersScreen({navigation}) {
   
   return (
     <View style={{height: "100%"}}>
-      <Text style={{alignSelf:"center", margin: 20, fontSize: 24}}>Orders Screen</Text>
+      <Appbar.Header>
+        <Appbar.Content title="Previous Orders" />
+      </Appbar.Header>
       <FlatList
         data={orders}
         keyExtractor={(orders) => orders._id.toString()}
         renderItem={({item}) => (
           <OrderCard
             total={item.total}
-            time={item.createdAt}
+            time={item.restaurantName}
             tableNumber={item.tableNumber}
             item={item}
             navigation={navigation}

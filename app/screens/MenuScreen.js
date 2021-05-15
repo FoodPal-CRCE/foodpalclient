@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { Appbar, Button, Title } from 'react-native-paper';
 import MenuCard from "../components/menu/MenuCard"
 import MenuList from "../components/menu/MenuList"
@@ -21,15 +21,19 @@ export default function MenuScreen({navigation, route}) {
         dispatch(getRestaurant(doc));
     },[dispatch])
     return (
-        <View style={{ flex: 1 }}>
-            <Appbar.Header>
+        <View>
+        <Appbar.Header>
                 <Appbar.BackAction/>
                 <Appbar.Content title="Our Menu" subtitle="Scanned restaurant's menu" />
 
             </Appbar.Header>
+        
+        <ScrollView>
+           
 
             <MenuList />
-            <Button mode="contained" onPress={() => navigation.navigate("CartScreen")} style={{marginBottom: "20%"}}>View Cart</Button>
+            <Button style={{margin: '20%'}} mode="contained" onPress={() => navigation.navigate("CartScreen")} style={{marginBottom: "20%"}}>View Cart</Button>
+        </ScrollView>
         </View>
     )
 }

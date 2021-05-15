@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRecentOrder, updateIsPaid } from '../reducers/orderSlice';
 import OrderCard from '../components/orders/OrderCard'
 import RazorpayCheckout from "react-native-razorpay";
-import {Button, Snackbar } from 'react-native-paper';
+import {Button, Snackbar, Appbar } from 'react-native-paper';
 function RecentOrders({navigation}) {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.signin.token)
@@ -71,7 +71,8 @@ function RecentOrders({navigation}) {
 
     const handleOk = async () => {
       dispatch(await clear());
-      
+      navigation.navigate("MainScreen");
+      console.log("Yahan Se nikal")
     }
 
     useEffect(() => {
@@ -79,14 +80,16 @@ function RecentOrders({navigation}) {
     }, [])
     return (
         <View style={{height: "100%"}}>
-      <Text style={{alignSelf:"center", margin: 20, fontSize: 24}}>Recent Orders Screen</Text>
+          <Appbar.Header>
+          <Appbar.Content title="Your Order" subtitle="Order is now placed" />
+          </Appbar.Header>
       <FlatList
         data={recentOrders}
         keyExtractor={(orders) => orders._id.toString()}
         renderItem={({item}) => (
           <OrderCard
             total={item.total}
-            time={item.createdAt}
+            time={item.restaurantName}
             tableNumber={item.tableNumber}
             item={item}
             navigation={navigation}
@@ -117,12 +120,6 @@ function RecentOrders({navigation}) {
           label: 'Ok',
           onPress: async() => {
             await handleOk()
-            navigation.reset({
-              routes: [
-                {name: 'MainScreen'}
-              ],
-              
-            })
           },
         }}>
         Payment Successfully Completed

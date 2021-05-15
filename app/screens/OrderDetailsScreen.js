@@ -1,14 +1,21 @@
 import React from 'react';
-import {StyleSheet, View, FlatList} from 'react-native';
+import {StyleSheet, View, Text ,FlatList} from 'react-native';
 
 import OrderItem from './../components/orders/OrderItem';
 import ListItemSeparator from './../components/ListItemSeparator';
+import { Appbar } from 'react-native-paper';
 
-function OrderDetailsScreen({order}) {
+function OrderDetailsScreen({route}) {
+  const data = route.params;
+  console.log(data);
   return (
     <View style={styles.container}>
+      <Appbar.Header>
+        <Appbar.Content title="Order Status" subtitle={`See what's cooking @ ${data.item.restaurantName}`} />
+      </Appbar.Header>
+      
       <FlatList
-        data={order.items}
+        data={data.item.items}
         ItemSeparatorComponent={ListItemSeparator}
         keyExtractor={(items) => items._id.toString()}
         renderItem={({item}) => <OrderItem item={item} />}
@@ -19,7 +26,7 @@ function OrderDetailsScreen({order}) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
   },
 });
 

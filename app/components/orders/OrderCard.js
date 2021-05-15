@@ -16,7 +16,7 @@ function OrderCard({time, total, tableNumber, item, navigation}) {
         <Paragraph>Table: {tableNumber}</Paragraph>
         <Paragraph>Total: {total}</Paragraph>
         <View style={styles.actions}>
-          <Button icon="chevron-triple-right" onPress={() => {navigation.navigate('OrderDetailsScreen', order={item})}}>
+          <Button icon="chevron-triple-right" onPress={() => {navigation.navigate('OrderDetailsScreen', {item})}}>
             View
           </Button>
         </View>

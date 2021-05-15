@@ -9,17 +9,7 @@ import {
 const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        cartItems: {
-            //structure
-            // "123": {
-            //     "name": "Chicken Tikka",
-            //     "quantity": 1,
-            //     "price": 200,
-            //     "id": 123
-            // }
-
-
-        }, //key is id of item and value is the item 
+        cartItems: {}, //key is id of item and value is the item 
         error: null,
         totalPrice: 0,
         localTotal: 0,

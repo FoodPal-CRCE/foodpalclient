@@ -8,14 +8,17 @@ const getStatus = (item) => {
   if (item.isServed) return 'Served';
   if (item.isPrepared) return 'Prepared';
   if (item.isPreparing) return 'Preparing';
+  return 'Order Received';
+
 };
 
 function OrderItem({item}) {
+  console.log("Order Item ka Item", item);
   return (
     <View style={styles.container}>
       <Image source={order_item} style={styles.image} />
       <View style={styles.data}>
-        <Title>{item.name}</Title>
+        <Title>{item.itemName}</Title>
         <Paragraph>{getStatus(item)}</Paragraph>
         <Text>{item.quantity}</Text>
       </View>

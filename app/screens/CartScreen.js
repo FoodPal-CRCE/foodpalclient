@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, StyleSheet, ScrollView} from 'react-native';
-import {Button, Card, Title, Paragraph} from 'react-native-paper';
+import {Button, Card, Title, Appbar} from 'react-native-paper';
 import {useDispatch, useSelector} from 'react-redux';
 import {placeOrder} from '../reducers/placeOrderSlice';
 import CartItem from '../components/CartItem';
@@ -44,7 +44,7 @@ function CartScreen({navigation}) {
       restaurantId: id,
       tableNumber: tableNumber,
       items: items,
-      // restaurantName: restaurantName
+      restaurantName: restaurantName
     };
     console.log('Final Document: ', finalDoc);
   };
@@ -64,11 +64,13 @@ function CartScreen({navigation}) {
   });
 
   return (
-    <ScrollView>
-      <Text style={{textAlign: 'center', margin: 30, fontSize: 24}}>
-        Cart Screen
-      </Text>
+    <View>
+    <Appbar.Header>
+                <Appbar.BackAction/>
+                <Appbar.Content title="In Your Cart" subtitle="Place Order and Be Ready For Some Excitement" />
 
+            </Appbar.Header>
+    <ScrollView>
       {ren && (
         <FlatList
           data={items}
@@ -110,6 +112,7 @@ function CartScreen({navigation}) {
       </Button>
       </View>
     </ScrollView>
+    </View>
   );
 }
 
