@@ -91,7 +91,7 @@ const ProfileScreen = ({ navigation }) => {
         </TouchableRipple>
         <TouchableRipple onPress={() => { navigation.navigate('IngredientsScreen') }}>
           <View style={styles.menuItem}>
-            <Icon name="account-check-outline" color="#6617f5" size={25} />
+            <Icon name="food-variant" color="#6617f5" size={25} />
             <Text style={styles.menuItemText}>Recipes</Text>
           </View>
         </TouchableRipple>

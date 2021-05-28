@@ -26,12 +26,11 @@ function BlogDetailsScreen({route}) {
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{listing.title}</Text>
         <Text style={styles.location}>
-        <Icon name="credit-card" color="#6617f5" size={25}/>
             {listing.location}
         </Text>
         <Text style={styles.details}>
           
-          <Icon name="account-check-outline" color="#6617f5" size={25}/> {listing.username}
+          {/* <Icon name="account-check-outline" color="#6617f5" size={25}/> {listing.username} */}
         </Text>
       </View>
     </View>

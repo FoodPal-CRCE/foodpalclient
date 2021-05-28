@@ -32,9 +32,9 @@ import {
             // console.log(response.data);
             //Async store krenge idhr
             console.log('Ho gya')
-            console.log("Access Token::",response.data.accessToken);
-            await AsyncStorage.setItem("me", JSON.stringify(response.data.accessToken))
-            
+            // console.log("Access Token::",response.data.accessToken);
+            // await AsyncStorage.setItem("me", JSON.stringify(response.data.accessToken))
+            // return data;
             }
             else{
                 console.log("Bhaduhjad1")

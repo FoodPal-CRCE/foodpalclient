@@ -5,6 +5,8 @@ import { getRecentOrder, updateIsPaid } from '../reducers/orderSlice';
 import OrderCard from '../components/orders/OrderCard'
 import RazorpayCheckout from "react-native-razorpay";
 import {Button, Snackbar, Appbar } from 'react-native-paper';
+import { clear } from '../reducers/cartSlice';
+
 function RecentOrders({navigation}) {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.signin.token)

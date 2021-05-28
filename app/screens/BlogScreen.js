@@ -98,13 +98,13 @@ function BlogScreen({navigation}) {
         <Appbar.Content title="Blogs" subtitle="Showcase your Talent" />
       </Appbar.Header>
       <FlatList
+        style={{margin: "5%"}}
         data={posts}
         keyExtractor={(posts) => posts.url}
         renderItem={({item}) => (
           <BlogCard
             title={item.title}
             location={item.description}
-            username={item.dish}
             image={{uri: item.url}}
             navigation={navigation}
           />
@@ -172,24 +172,7 @@ function BlogScreen({navigation}) {
                 onChangeText = {text=>setDescription(text)}
                 mode="flat"
             />
-            <Menu 
-              visible={visibleMenu}
-              onDismiss={closeMenu}
-              anchor={
-              <Button style={{marginBottom: "10%"}} mode="contained" onPress={openMenu}>
-                Dish Type</Button>}
-              
-            >
-              <Menu.Item onPress={() => {
-                closeMenu();
-                setDish('Pizza')
-                }} title="Pizza" />
-              <Divider/>
-              <Menu.Item onPress={() => {
-                closeMenu();
-                setDish('Burger');
-            }} title="Burger" />
-            </Menu>
+            
               <Button style={styles.submit} contentStyle={{height: 50}} mode="contained" onPress={() => handleSubmit()}>
                   Submit
               </Button>

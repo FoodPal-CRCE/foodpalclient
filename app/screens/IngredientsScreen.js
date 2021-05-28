@@ -17,29 +17,17 @@ export default function IngredientsScreen({ navigation }) {
     const dispatch = useDispatch();
     console.log(recipes);
 
-    // if (recipes) {
-    //     var values = [];
-    //     recipes.forEach((recipe) => {
-    //         values.push(recipes.)
-    //     })
-    //     const data = {
-    //         labels: ["Calories", "Fat"],
-    //         datasets: [
-    //             {
-    //                 data: 
-    //             }
-    //         ]
-    //     }
-    // }
 
     return (
-        <View style={{ height: "100%" }}>
-            <Appbar.Header>
+        <View>
+        <Appbar.Header>
                 <Appbar.BackAction onPress={() => {
                     navigation.navigate('ProfileScreen');
                 }} />
                 <Appbar.Content title="Search Recipes" />
             </Appbar.Header>
+        <View style={{ height: "100%", margin: "5%", marginRight: 0 }}>
+            
             <ScrollView style={{ height: "100%" }}>
                 <ReactChipsInput
 
@@ -100,6 +88,7 @@ export default function IngredientsScreen({ navigation }) {
                 />
 
             </ScrollView>
+        </View>
         </View>
     )
 }
